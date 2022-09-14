@@ -87,9 +87,34 @@ const logo = document.querySelector('.nav__logo');
 console.log(logo.alt);
 console.log(logo.src);
 console.log(logo.className);
+
+logo.alt = 'Beautiful minimalist logo';
+
 //non-standard attribute
-console.log(logo.designer);
-console.log(logo.getAttribute('designer'));
+console.log(logo.designer); //cannot be gotten like this
+console.log(logo.getAttribute('designer')); //however you can still get the designer attribute like this
+logo.setAttribute('company', 'Bankist'); //add a attribute and give it the string of Bankist
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('hef'));
+
+//data attributes
+
+console.log(logo.CDATA_SECTION_NODE.versionNumber);
+//classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); //not includes
+
+// do not do this
+//this will over ride the classes of the element
+//only allow for one class
+logo.className = 'jonas';
 //----styles, attributes and classes
+
 //!===============
 //!==================
