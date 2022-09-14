@@ -71,6 +71,7 @@ document
 //----- Selecting, Creating, and Deleting Elements
 //!===============
 //----styles, attributes and classes
+//styles
 message.style.backgroundColor = '#37373d';
 message.style.width = '120%';
 console.log(message.style.height); //getting the height from the inline style attributes.. will not fetch the height from the css file
@@ -79,6 +80,16 @@ console.log(getComputedStyle(message).color); //we can however us this to get th
 console.log(getComputedStyle(message).height); //get the height
 //parsing out the px so that it is not a string, so we can then at 40 px to the original height
 message.style.height =
-  Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px'; //increase the height of the cookie navigation bar by 40px
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px'; //increase the height of the cookie navigation bar by 40px
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+//Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+//non-standard attribute
+console.log(logo.designer);
+console.log(logo.getAttribute('designer'));
 //----styles, attributes and classes
 //!===============
+//!==================
