@@ -64,6 +64,7 @@ btnScrollTo.addEventListener('click', function (e) {
   //working in modern browsers only for smooth scrolling
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
 //!===============
 //page navigation
 // document.querySelectorAll('.nav__link').forEach(function (el) {
@@ -89,8 +90,10 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   if (e.target.classList.contains('nav__link')) {
     console.log('object');
     const id = e.target.getAttribute('href');
+    console.log(id);
     // console.log(id);
-    document.querySelector(id).scrollIntoView({
+    document.querySelector('#section--1').scrollIntoView({
+      block: 'center',
       behavior: 'smooth',
     });
   }
@@ -188,7 +191,7 @@ logo.className = 'jonas';
 
 //!===============
 // Button scrolling
-//assigning the varibles to be used in the event listener accessing the html item
+//assigning the variables to be used in the event listener accessing the html item
 /*
 ////const btnScrollTo = document.querySelector('.btn--scroll-to');
 ////const section1 = document.querySelector('#section--1');
@@ -224,7 +227,7 @@ btnScrollTo.addEventListener('click', function (e) {
   //working in modern browsers only for smooth scrolling
   section1.scrollIntoView({ behavior: 'smooth' });
 });
-*/
+
 //!==================
 // events and event handlers
 /*
@@ -240,7 +243,7 @@ const alertH1 = function (e) {
 h1.addEventListener('mouseenter', alertH1);
 //turn off and remove the event listener so the user does not have the prompt keep popping up after 3 seconds
 setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
-// //!older and you can only have one
+!older and you can only have one
 // h1.onmouseenter = function (e) {
   */
 //   alert('onmouseenter:great! You are reading the heading:D');
@@ -248,7 +251,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 //!==================
 // Event Propagation: Bubbling and Capturing
 // rgb(255, 255, 255)
-//todo not working properly, not getting color to randomize
+/*
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 //getting a random  rgb color grabbing a random numb between 0 and 255 3 times
@@ -256,10 +259,10 @@ const randomInt = (min, max) =>
 const randomColor = () =>
   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
 console.log(randomColor());
-console.log(randomInt());
+console.log(randomInt(5, 96));
 
 document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backGroundColor = randomColor();
+  this.style.backgroundColor = randomColor();
   console.log('LINK', e.target, e.currentTarget);
   console.log(e.currentTarget === this);
 
@@ -268,17 +271,18 @@ document.querySelector('.nav__link').addEventListener('click', function (e) {
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
   console.log('CONTAINER', e.target, e.currentTarget);
-  this.style.backGroundColor = randomColor();
 });
 document.querySelector('.nav').addEventListener(
   'click',
   function (e) {
+    this.style.backgroundColor = randomColor();
     console.log('NAV', e.target, e.currentTarget);
-    this.style.backGroundColor = randomColor();
   }
   // true //this means it will catch the process as it goes down
 );
+*/
 // Event Propagation: Bubbling and Capturing
 //!==================
 //Event Delegation: Implementing Page Navigation
