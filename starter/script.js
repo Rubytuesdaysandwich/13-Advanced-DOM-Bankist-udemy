@@ -33,6 +33,7 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////////////////////
 //!===============
 //----- Selecting, Creating, and Deleting Elements
+/*
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
@@ -67,11 +68,12 @@ document
     //dom traversing
     message.parentElement.removeChild(message);
   });
-
+*/
 //----- Selecting, Creating, and Deleting Elements
 //!===============
 //----styles, attributes and classes
 //styles
+/*
 message.style.backgroundColor = '#37373d';
 message.style.width = '120%';
 console.log(message.style.height); //getting the height from the inline style attributes.. will not fetch the height from the css file
@@ -114,7 +116,71 @@ logo.classList.contains('c'); //not includes
 //this will over ride the classes of the element
 //only allow for one class
 logo.className = 'jonas';
+*/
 //----styles, attributes and classes
 
 //!===============
+// Button scrolling
+//assigning the varibles to be used in the event listener accessing the html item
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+//get the window positioning
+//listening for the button click on learn more to scroll the user to the first section
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+  //get the users current scroll position
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  //distance from the top of the page in px
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight, //get the height and width of the viewport
+    document.documentElement.clientWidth
+  );
+  //this is the older technique to scroll smooth
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  //end this is the older technique to scroll smooth
+  //working in modern browsers only for smooth scrolling
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+//!==================
+// events and event handlers
+const h1 = document.querySelector('h1');
+//you can have multiple event listeners on a single item
+
+//alertH1 function that can be called anywhere
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D');
+};
+//alertH1 function that can be called anywhere
+
+h1.addEventListener('mouseenter', alertH1);
+//turn off and remove the event listener so the user does not have the prompt keep popping up after 3 seconds
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// //!older and you can only have one
+// h1.onmouseenter = function (e) {
+//   alert('onmouseenter:great! You are reading the heading:D');
+// };
+//!==================
+// Event Propagation: Bubbling and Capturing
+const randomInt = (min, max) =>
+  Math.floor(math.random() * (max - min + 1) + min);
+//getting a random  rgb color grabbing a random numb between 0 and 255 3 times
+//we use random Int to get the min and the max and do math at random
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// Event Propagation: Bubbling and Capturing
 //!==================
