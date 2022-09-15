@@ -158,6 +158,7 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 //!==================
 // events and event handlers
+/*
 const h1 = document.querySelector('h1');
 //you can have multiple event listeners on a single item
 
@@ -172,6 +173,7 @@ h1.addEventListener('mouseenter', alertH1);
 setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // //!older and you can only have one
 // h1.onmouseenter = function (e) {
+  */
 //   alert('onmouseenter:great! You are reading the heading:D');
 // };
 //!==================
@@ -183,23 +185,21 @@ const randomInt = (min, max) =>
 //we use random Int to get the min and the max and do math at random
 const randomColor = () =>
   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
-// console.log(randomColor(0, 255));
+console.log(randomColor());
+console.log(randomInt());
 
-document
-  .querySelector('.nav__link')
-  .addEventListener('click', function (changeColors) {
-    this.style.backGroundColor = randomColor();
-  });
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  console.log('LINK');
+  this.style.backGroundColor = randomColor();
+});
 
-document
-  .querySelector('.nav__links')
-  .addEventListener('click', function (changeColors) {
-    this.style.backGroundColor = randomColor();
-  });
-document
-  .querySelector('.nav')
-  .addEventListener('click', function (changeColors) {
-    this.style.backGroundColor = randomColor();
-  });
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // console.log('LINK');
+  // this.style.backGroundColor = randomColor();
+});
+document.querySelector('.nav').addEventListener('click', function (e) {
+  // console.log('LINK');
+  // this.style.backGroundColor = randomColor();
+});
 // Event Propagation: Bubbling and Capturing
 //!==================
