@@ -176,11 +176,30 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // };
 //!==================
 // Event Propagation: Bubbling and Capturing
+// rgb(255, 255, 255)
 const randomInt = (min, max) =>
-  Math.floor(math.random() * (max - min + 1) + min);
+  Math.floor(Math.random() * (max - min + 1) + min);
 //getting a random  rgb color grabbing a random numb between 0 and 255 3 times
 //we use random Int to get the min and the max and do math at random
 const randomColor = () =>
   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// console.log(randomColor(0, 255));
+
+document
+  .querySelector('.nav__link')
+  .addEventListener('click', function (changeColors) {
+    this.style.backGroundColor = randomColor();
+  });
+
+document
+  .querySelector('.nav__links')
+  .addEventListener('click', function (changeColors) {
+    this.style.backGroundColor = randomColor();
+  });
+document
+  .querySelector('.nav')
+  .addEventListener('click', function (changeColors) {
+    this.style.backGroundColor = randomColor();
+  });
 // Event Propagation: Bubbling and Capturing
 //!==================
