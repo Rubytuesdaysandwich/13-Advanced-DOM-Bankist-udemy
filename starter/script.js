@@ -2,7 +2,8 @@
 
 ///////////////////////////////////////
 // Modal window
-
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -29,6 +30,72 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+// Button scrolling
+//assigning the varibles to be used in the event listener accessing the html item
+
+//get the window positioning
+//listening for the button click on learn more to scroll the user to the first section
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+  //get the users current scroll position
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  //distance from the top of the page in px
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight, //get the height and width of the viewport
+    document.documentElement.clientWidth
+  );
+  //this is the older technique to scroll smooth
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  //end this is the older technique to scroll smooth
+  //working in modern browsers only for smooth scrolling
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+//!===============
+//page navigation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     console.log('LINK');
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth',
+//     });
+//   });
+// });
+
+//using event propagation to apply event to all links with the parent element
+//1.add event listener to common parent element
+//2.Determine what element originated the event
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log(e.target);
+  e.preventDefault;
+  //matching strategy
+  //determining where the click  event comes from on the parent container
+  if (e.target.classList.contains('nav__link')) {
+    console.log('object');
+    const id = e.target.getAttribute('href');
+    // console.log(id);
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+});
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //!===============
@@ -122,8 +189,9 @@ logo.className = 'jonas';
 //!===============
 // Button scrolling
 //assigning the varibles to be used in the event listener accessing the html item
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+/*
+////const btnScrollTo = document.querySelector('.btn--scroll-to');
+////const section1 = document.querySelector('#section--1');
 
 //get the window positioning
 //listening for the button click on learn more to scroll the user to the first section
@@ -156,6 +224,7 @@ btnScrollTo.addEventListener('click', function (e) {
   //working in modern browsers only for smooth scrolling
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+*/
 //!==================
 // events and event handlers
 /*
@@ -179,6 +248,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 //!==================
 // Event Propagation: Bubbling and Capturing
 // rgb(255, 255, 255)
+//todo not working properly, not getting color to randomize
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 //getting a random  rgb color grabbing a random numb between 0 and 255 3 times
@@ -189,17 +259,29 @@ console.log(randomColor());
 console.log(randomInt());
 
 document.querySelector('.nav__link').addEventListener('click', function (e) {
-  console.log('LINK');
   this.style.backGroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+
+  //stop propagation, prevent it from bubbling out
+  // e.stopPropagation();
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  // console.log('LINK');
-  // this.style.backGroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+  this.style.backGroundColor = randomColor();
 });
-document.querySelector('.nav').addEventListener('click', function (e) {
-  // console.log('LINK');
-  // this.style.backGroundColor = randomColor();
-});
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    console.log('NAV', e.target, e.currentTarget);
+    this.style.backGroundColor = randomColor();
+  }
+  // true //this means it will catch the process as it goes down
+);
 // Event Propagation: Bubbling and Capturing
 //!==================
+//Event Delegation: Implementing Page Navigation
+
+//Event Delegation: Implementing Page Navigation
+//!===============
