@@ -62,7 +62,7 @@ btnScrollTo.addEventListener('click', function (e) {
   // });
   //end this is the older technique to scroll smooth
   //working in modern browsers only for smooth scrolling
-  section1.scrollIntoView({ behavior: 'smooth' });
+  // section1.scrollIntoView({ behavior: 'smooth' });
 });
 
 //!===============
@@ -89,13 +89,11 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   //determining where the click  event comes from on the parent container
   if (e.target.classList.contains('nav__link')) {
     console.log('object');
-    const id = e.target.getAttribute('href');
+    const id = e.target.id;
     console.log(id);
-    // console.log(id);
-    document.querySelector('#section--1').scrollIntoView({
-      block: 'center',
-      behavior: 'smooth',
-    });
+    const section = document.querySelector(`#section--${id}`);
+    console.log(section);
+    section.scrollIntoView({ behavior: 'smooth' });
   }
 });
 
@@ -171,7 +169,7 @@ console.log(logo.getAttribute('src'));
 
 const link = document.querySelector('.twitter-link');
 console.log(link.href);
-console.log(link.getAttribute('hef'));
+console.log(link.getAttribute('href'));
 
 //data attributes
 

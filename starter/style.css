@@ -13,7 +13,12 @@
   --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
-
+.nav__link {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
 * {
   margin: 0;
   padding: 0;
@@ -128,7 +133,6 @@ img {
 .nav.sticky {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.95);
-  /* background-color: rgb(96, 149, 234); */
 }
 
 .nav__logo {
