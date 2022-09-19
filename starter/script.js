@@ -203,18 +203,26 @@ headerObserver.observe(header);
 //------intersections OBSERVER API
 //!===============
 //------ revealing images with the INTERSECTING OBSERVER API
-const allSections = document.querySelectorAll('.section');
+const allSections = document.querySelectorAll('.section'); //get all the sections into variable
 const revealSection = function (entries, observer) {
-  const sectionObserver = new IntersectionObserver(revealSection, {
-    root: null,
-    threshold: 0,
-    rootMargin: '0px',
-  });
-  allSections.forEach(function (section) {
-    sectionObserver.observe(section);
-    section.classList.add('section--hidden');
-  });
+  const [entry] = entries; //deconstruct entry into entries
+  // console.log(entry);
+  if (!entry.isIntersecting) {
+    return; //guard clause returns immediately if it is true
+  } else {
+    entry.target.classList.remove('section--hidden'); //remove the section--hidden class from the sections when the scrolling reaches the target sections
+    observer.unobserve(entry.target); //unobserve the observer to save resources from being logged
+  }
 };
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
 //------ revealing images with the INTERSECTING OBSERVER API
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
