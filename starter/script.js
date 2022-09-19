@@ -203,6 +203,7 @@ headerObserver.observe(header);
 //------intersections OBSERVER API
 //!===============
 //------ revealing images with the INTERSECTING OBSERVER API
+
 const allSections = document.querySelectorAll('.section'); //get all the sections into variable
 const revealSection = function (entries, observer) {
   const [entry] = entries; //deconstruct entry into entries
@@ -224,6 +225,11 @@ allSections.forEach(function (section) {
 });
 
 //------ revealing images with the INTERSECTING OBSERVER API
+//!============
+//------Lazy loading images
+
+//------Lazy loading images
+//!===========
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //!===============
