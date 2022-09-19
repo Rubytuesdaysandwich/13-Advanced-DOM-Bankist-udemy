@@ -116,6 +116,7 @@ tabsContainer.addEventListener('click', function (e) {
 
   if (!clicked) return; //guard clause if nothing is click return immediately keeps the rest of the code from being ran
 
+  console.log('here');
   //remove active tabs
   tabs.forEach(t => t.classList.remove('operations__tab--active')); //remove the class from the button making it inactive
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
@@ -126,26 +127,26 @@ tabsContainer.addEventListener('click', function (e) {
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
-  //----- end tabs
-  //!======
-  //-----menu fade animation
+});
+//----- end tabs
+//!======
+//-----menu fade animation
+// const nav = document.querySelector('.nav'); moved
+const handleHover = function (e, opacity) {
+  console.log(this, e.currentTarget);
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
 
-  // const nav = document.querySelector('.nav'); moved
-  const handleHover = function (e, opacity) {
-    console.log(this, e.currentTarget);
-    if (e.target.classList.contains('nav__link')) {
-      const link = e.target;
-      const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-      const logo = link.closest('.nav').querySelector('img');
-
-      siblings.forEach(el => {
-        if (el !== link) el.style.opacity = opacity;
-      });
-      logo.style.opacity = opacity;
-    }
-  };
-  nav.addEventListener('mouseover', handleHover.bind(0.5));
-  nav.addEventListener('mouseout', handleHover.bind(1));
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
