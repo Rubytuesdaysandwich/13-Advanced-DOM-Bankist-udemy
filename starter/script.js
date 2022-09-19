@@ -150,6 +150,8 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 //!=============
 //----sticky navigation
+//----poor performance issues from high amount of scroll events from listener
+/*
 const initialCoords = section1.getBoundingClientRect();
 console.log(initialCoords);
 window.addEventListener('scroll', function () {
@@ -161,8 +163,41 @@ window.addEventListener('scroll', function () {
     nav.classList.remove('sticky');
   }
 });
+*/
 //------end sticky navigation
 //!=============
+//intersections OBSERVER API
+/*
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2],
+};
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+*/
+
+const header = document.querySelector('.header');
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  //if entry intersecting false make give navigation bar the class of sticky else if its true remove the sticky class
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky'); //add sticky class
+  } else {
+    nav.classList.remove('sticky'); //remove sticky class
+  }
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+});
+headerObserver.observe(header);
+//intersections OBSERVER API
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //!===============
