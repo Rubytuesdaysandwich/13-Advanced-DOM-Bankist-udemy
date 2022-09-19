@@ -166,7 +166,7 @@ window.addEventListener('scroll', function () {
 */
 //------end sticky navigation
 //!=============
-//intersections OBSERVER API
+//-------intersections OBSERVER API
 /*
 const obsCallback = function (entries, observer) {
   entries.forEach(entry => {
@@ -200,7 +200,7 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`, //the height of the navbar is 90 px
 }); //get the navHeight from the getBoundingClientRect
 headerObserver.observe(header);
-//intersections OBSERVER API
+//------intersections OBSERVER API
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //!===============
