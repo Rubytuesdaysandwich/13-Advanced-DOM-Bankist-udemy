@@ -133,7 +133,7 @@ tabsContainer.addEventListener('click', function (e) {
 //-----menu fade animation
 // const nav = document.querySelector('.nav'); moved
 const handleHover = function (e) {
-  console.log(this, e.currentTarget);
+  // console.log(this, e.currentTarget);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -148,7 +148,21 @@ const handleHover = function (e) {
 //passing "argument" into handler
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
+//!=============
+//----sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+window.addEventListener('scroll', function () {
+  console.log(window, scrollY);
 
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+//------end sticky navigation
+//!=============
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //!===============
