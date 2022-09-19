@@ -99,7 +99,8 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
 });
-//tab cards
+//!======
+//--------tab cards
 //* const tabs = document.querySelectorAll('.operations__tab');
 //* const tabsContainer = document.querySelector('.operations__tab-container');
 //* const tabsContent = document.querySelectorAll('.operations__content');
@@ -125,30 +126,32 @@ tabsContainer.addEventListener('click', function (e) {
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
-  // end tabs
+  //----- end tabs
   //!======
   //-----menu fade animation
+
   // const nav = document.querySelector('.nav'); moved
-  const handleHover = function(e,opacity){
+  const handleHover = function (e, opacity) {
+    console.log(this, e.currentTarget);
     if (e.target.classList.contains('nav__link')) {
       const link = e.target;
       const siblings = link.closest('.nav').querySelectorAll('.nav__link');
       const logo = link.closest('.nav').querySelector('img');
-      
+
       siblings.forEach(el => {
         if (el !== link) el.style.opacity = opacity;
       });
       logo.style.opacity = opacity;
     }
-  }
-});
-nav.addEventListener('mouseover',handleHover );
-  nav.addEventListener('mouseout',handleHover );
-  ///////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////
-  //!===============
-  //----- Selecting, Creating, and Deleting Elements
-  /*
+  };
+  nav.addEventListener('mouseover', handleHover.bind(0.5));
+  nav.addEventListener('mouseout', handleHover.bind(1));
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//!===============
+//----- Selecting, Creating, and Deleting Elements
+/*
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
@@ -184,11 +187,11 @@ document
     message.parentElement.removeChild(message);
   });
 */
-  //----- Selecting, Creating, and Deleting Elements
-  //!===============
-  //----styles, attributes and classes
-  //styles
-  /*
+//----- Selecting, Creating, and Deleting Elements
+//!===============
+//----styles, attributes and classes
+//styles
+/*
 message.style.backgroundColor = '#37373d';
 message.style.width = '120%';
 console.log(message.style.height); //getting the height from the inline style attributes.. will not fetch the height from the css file
@@ -232,12 +235,12 @@ logo.classList.contains('c'); //not includes
 //only allow for one class
 logo.className = 'jonas';
 */
-  //----styles, attributes and classes
+//----styles, attributes and classes
 
-  //!===============
-  // Button scrolling
-  //assigning the variables to be used in the event listener accessing the html item
-  /*
+//!===============
+// Button scrolling
+//assigning the variables to be used in the event listener accessing the html item
+/*
 ////const btnScrollTo = document.querySelector('.btn--scroll-to');
 ////const section1 = document.querySelector('#section--1');
 
@@ -291,12 +294,12 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 !older and you can only have one
 // h1.onmouseenter = function (e) {
   */
-  //   alert('onmouseenter:great! You are reading the heading:D');
-  // };
-  //!==================
-  // Event Propagation: Bubbling and Capturing
-  // rgb(255, 255, 255)
-  /*
+//   alert('onmouseenter:great! You are reading the heading:D');
+// };
+//!==================
+// Event Propagation: Bubbling and Capturing
+// rgb(255, 255, 255)
+/*
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 //getting a random  rgb color grabbing a random numb between 0 and 255 3 times
@@ -328,15 +331,15 @@ document.querySelector('.nav').addEventListener(
   // true //this means it will catch the process as it goes down
 );
 */
-  //-------- Event Propagation: Bubbling and Capturing
-  //!==================
-  //---Event Delegation: Implementing Page Navigation
-  //page navigation
-  //page smooth scrolling
-  //---------Event Delegation: Implementing Page Navigation
-  //!===============
-  //---------DOM traversing
-  /*
+//-------- Event Propagation: Bubbling and Capturing
+//!==================
+//---Event Delegation: Implementing Page Navigation
+//page navigation
+//page smooth scrolling
+//---------Event Delegation: Implementing Page Navigation
+//!===============
+//---------DOM traversing
+/*
 const h1 = document.querySelector('h1');
 //going downwards: child
 console.log(h1.querySelectorAll('.highlight'));
@@ -362,36 +365,36 @@ console.log(h1.parentElement.children);
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
 */
-  //-----end DOM traversing
-  //!===============
-  //-----tabbed component
-  // const tabs = document.querySelectorAll('.operations__tab');
-  // const tabsContainer = document.querySelector('.operations__tab-container');
-  // const tabsContent = document.querySelectorAll('.operations__content');
+//-----end DOM traversing
+//!===============
+//-----tabbed component
+// const tabs = document.querySelectorAll('.operations__tab');
+// const tabsContainer = document.querySelector('.operations__tab-container');
+// const tabsContent = document.querySelectorAll('.operations__content');
 
-  // // bad practice if you end up having lots  of events that its tied to because the duplicate, instead you should use
-  // //event propagation
-  // // tabs.forEach(t => t.addEventListener('click', () => console.log('TAB')));
+// // bad practice if you end up having lots  of events that its tied to because the duplicate, instead you should use
+// //event propagation
+// // tabs.forEach(t => t.addEventListener('click', () => console.log('TAB')));
 
-  // tabsContainer.addEventListener('click', function (e) {
-  //   e.preventDefault();
-  //   const clicked = e.target.closest('.operations__tab'); //find the closest parent with the class name .operations__tab
-  //   // console.log(clicked);
+// tabsContainer.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   const clicked = e.target.closest('.operations__tab'); //find the closest parent with the class name .operations__tab
+//   // console.log(clicked);
 
-  //   if (!clicked) return; //guard clause if nothing is click return immediately keeps the rest of the code from being ran
+//   if (!clicked) return; //guard clause if nothing is click return immediately keeps the rest of the code from being ran
 
-  //   //remove active tabs
-  //   tabs.forEach(t => t.classList.remove('operations__tab--active')); //remove the class from the button making it inactive
-  //   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
-  //   //active tab
-  //   clicked.classList.add('operations__tab--active');
-  //   //active content area
-  //   // console.log(clicked.dataset.tab);
-  //   document
-  //     .querySelector(`.operations__content--${clicked.dataset.tab}`)
-  //     .classList.add('operations__content--active');
-  //----end tabs
-});
+//   //remove active tabs
+//   tabs.forEach(t => t.classList.remove('operations__tab--active')); //remove the class from the button making it inactive
+//   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+//   //active tab
+//   clicked.classList.add('operations__tab--active');
+//   //active content area
+//   // console.log(clicked.dataset.tab);
+//   document
+//     .querySelector(`.operations__content--${clicked.dataset.tab}`)
+//     .classList.add('operations__content--active');
+//----end tabs
+// });
 //!===============
 //----Passing Arguments to Event Handlers
 
