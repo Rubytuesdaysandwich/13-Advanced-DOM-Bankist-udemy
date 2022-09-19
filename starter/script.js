@@ -182,9 +182,11 @@ observer.observe(section1);
 */
 
 const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height; //getting the rootmargin because we don't want 90px hard coded because of differences in screen sizes
+// console.log(navHeight);
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
   //if entry intersecting false make give navigation bar the class of sticky else if its true remove the sticky class
   if (!entry.isIntersecting) {
     nav.classList.add('sticky'); //add sticky class
@@ -195,7 +197,8 @@ const stickyNav = function (entries) {
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
-});
+  rootMargin: `-${navHeight}px`, //the height of the navbar is 90 px
+}); //get the navHeight from the getBoundingClientRect
 headerObserver.observe(header);
 //intersections OBSERVER API
 ///////////////////////////////////////////////////////
