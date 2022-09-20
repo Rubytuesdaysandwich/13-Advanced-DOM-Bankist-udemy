@@ -228,11 +228,11 @@ allSections.forEach(function (section) {
 //!============
 //------Lazy loading images great for peformance
 const imgTargets = document.querySelectorAll('img[data-src]');
-console.log(imgTargets);
+// console.log(imgTargets);
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
   if (!entry.isIntersecting) {
     return;
   } else {
@@ -254,6 +254,97 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 //------Lazy loading images
 //!===========
+//---------sliders
+const slider = function () {
+  const slides = document.querySelectorAll('.slide'); //select the slides
+  const btnLeft = document.querySelector('.slider__btn--left'); //select the left button
+  const btnRight = document.querySelector('.slider__btn--right'); //select the right button
+  const dotContainer = document.querySelector('.dots'); //selecting the dots at the bottom of the slider
+
+  let curSlide = 0; //sets the current slide it is on, we are using let because this will change automatically based on how many slides you have
+  const maxSlide = slides.length; //returns the number of slides
+  console.log(maxSlide); //returns a number of 3 slides
+  // Functions
+  //create the dots based on how many slides there are using a forEach method
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+    //remove the dots__dot--active class which adds a darker grey color to the dots making it a lighter grey color
+    //the class is then added to the next item selected to show that it is active
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+  //0, 100%, 200% 300% the slides are put nex to each other and the percentage represents their positions
+  //0 equals the first slide 100% is the second and so on
+  const goToSlide = function (slide) {
+    slides.forEach(
+      //translate to the slide that is selected based on position and percentages
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  // Next slide
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const init = function () {
+    goToSlide(0);
+    createDots();
+
+    activateDot(0);
+  };
+  init();
+
+  // Event handlers
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') prevSlide();
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+slider();
+//---------sliders
+//!===========
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
