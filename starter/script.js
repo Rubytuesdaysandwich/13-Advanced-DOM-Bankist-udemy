@@ -297,9 +297,9 @@ const slider = function () {
   // Next slide
   const nextSlide = function () {
     if (curSlide === maxSlide - 1) {
-      curSlide = 0;
+      curSlide = 0; //if the current slide eqaul to the max take the slides back to 0
     } else {
-      curSlide++;
+      curSlide++; //else if it is not equal to the max then just go to the next slide
     }
 
     goToSlide(curSlide);
@@ -308,31 +308,32 @@ const slider = function () {
 
   const prevSlide = function () {
     if (curSlide === 0) {
-      curSlide = maxSlide - 1;
+      //go to the previous slide
+      curSlide = maxSlide - 1; //if you are on the first slide and try to go back to it to the last slide
     } else {
-      curSlide--;
+      curSlide--; //else we just go back a slide
     }
     goToSlide(curSlide);
     activateDot(curSlide);
   };
-
+  //initialize the slides with a position of 0 and active slide of 0
   const init = function () {
     goToSlide(0);
     createDots();
 
     activateDot(0);
   };
-  init();
+  init(); //call the function init
 
   // Event handlers
-  btnRight.addEventListener('click', nextSlide);
-  btnLeft.addEventListener('click', prevSlide);
-
+  btnRight.addEventListener('click', nextSlide); //on click take the to the next slide
+  btnLeft.addEventListener('click', prevSlide); //on click take the to the previous slide
+  //on key press move the slides left or right based on button pressed
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowLeft') prevSlide();
     e.key === 'ArrowRight' && nextSlide();
   });
-
+  //add listener to the dots it allows the user the select a dot and go to it
   dotContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('dots__dot')) {
       const { slide } = e.target.dataset;
@@ -341,7 +342,7 @@ const slider = function () {
     }
   });
 };
-slider();
+slider(); //calling the slider function
 //---------sliders
 //!===========
 
