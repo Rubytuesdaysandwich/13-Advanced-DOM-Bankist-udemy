@@ -255,6 +255,7 @@ imgTargets.forEach(img => imgObserver.observe(img));
 //------Lazy loading images
 //!===========
 //---------sliders
+//put everything inside the function to prevent global name space from being polluted
 const slider = function () {
   const slides = document.querySelectorAll('.slide'); //select the slides
   const btnLeft = document.querySelector('.slider__btn--left'); //select the left button
@@ -262,7 +263,7 @@ const slider = function () {
   const dotContainer = document.querySelector('.dots'); //selecting the dots at the bottom of the slider
 
   let curSlide = 0; //sets the current slide it is on, we are using let because this will change automatically based on how many slides you have
-  const maxSlide = slides.length; //returns the number of slides
+  const maxSlide = slides.length; //returns the number of slides so that javascript knows it is the end
   console.log(maxSlide); //returns a number of 3 slides
   // Functions
   //create the dots based on how many slides there are using a forEach method
@@ -289,6 +290,8 @@ const slider = function () {
   //0 equals the first slide 100% is the second and so on
   const goToSlide = function (slide) {
     slides.forEach(
+      //s slides and i index
+      //transform moves the slides
       //translate to the slide that is selected based on position and percentages
       (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
     );
@@ -297,6 +300,7 @@ const slider = function () {
   // Next slide
   const nextSlide = function () {
     if (curSlide === maxSlide - 1) {
+      //-1 makes it zero based
       curSlide = 0; //if the current slide eqaul to the max take the slides back to 0
     } else {
       curSlide++; //else if it is not equal to the max then just go to the next slide
@@ -343,6 +347,10 @@ const slider = function () {
   });
 };
 slider(); //calling the slider function
+//make the slides smaller and scale them to see them side by side
+// const slider2 = document.querySelector('.slider');
+// slider2.style.transform = 'scale(0.2) translateX(-1200px) ';
+// slider2.style.overflow = 'visible';
 //---------sliders
 //!===========
 
@@ -597,7 +605,25 @@ console.log(h1.parentElement.children);
 //----end tabs
 // });
 //!===============
-//----Passing Arguments to Event Handlers
-
+// ----Passing Arguments to Event Handlers
+// above
 //----Passing Arguments to Event Handlers
 //!===============
+//DOM life cycle events
+//shows how log it take to load the html and network in the console
+//we do not need to have this wrap our javascript because we put the script at the end of our html
+//this makes sure the DOM loads before any scripts run
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+//listen to if the page is fully loaded from the window
+window.addEventListener('load', function (e) {
+  console.log('page fully loaded', e);
+});
+//can be useful to ask if the user want to leave the site upon exiting or being taken off the site
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
+//DOM life cycle events
