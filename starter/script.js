@@ -621,9 +621,15 @@ window.addEventListener('load', function (e) {
   console.log('page fully loaded', e);
 });
 //can be useful to ask if the user want to leave the site upon exiting or being taken off the site
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  console.log(e);
-  e.returnValue = '';
-});
+//prevent data loss in the middle of form being filled out
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
 //DOM life cycle events
+//!==============
+// Efficient Script Loading: defer and async
+//regular put the script at the end
+// async the script is loaded at the same time as the html shorter page loading time
+//defer the html parsing the html is not interrupted
